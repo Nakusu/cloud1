@@ -1,0 +1,51 @@
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - 443:443
+      - 80:80
+    restart: always
+    depends_on:
+      - wordpress
+    logging:
+     driver: "json-file"
+     options:
+      max-size: "10m"
+    volumes:
+      - "./volumes/nginx/default.conf.template:/etc/nginx/templates/default.conf.template:ro"
+      - wordpress:/var/www/wordpress
+      - phpmyadmin:/var/www/phpmyadmin
+    environment:
+      - WORDPRESS_SERVER_NAME=hiboucloud.duckdns.org
+      - PHPMYADMIN_SERVER_NAME=adminhiboucloud.duckdns.org
+  wordpress:
+    build: 
+      context: ./images/wordpress
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - db
+    volumes:
+      - wordpress:/var/www/wordpress
+  phpmyadmin:
+    build:
+      context: ./images/php-my-admin/
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - db
+    volumes:
+      - phpmyadmin:/var/www/phpmyadmin
+  db:
+    image: mariadb:11.8.2
+    restart: always
+    logging:
+     driver: "json-file"
+     options:
+      max-size: "10m"
+    volumes:
+      - "mariadb:/var/lib/mysql"
+volumes:
+  phpmyadmin:
+  mariadb:
+  wordpress:

@@ -1,0 +1,13 @@
+- name: Stop containers
+  community.docker.docker_compose_v2:
+    state: absent
+    project_name: hiboucloud
+    project_src: /home/app/
+- name: Remove images and networks
+  shell: docker system prune -a --force
+- name: Remove volumes
+  shell: docker volume prune -a --force
+- name: Remove app
+  ansible.builtin.file:
+    state: absent
+    path: /home/app

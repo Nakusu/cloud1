@@ -1,0 +1,4 @@
+hiboucloud:
+  hosts:
+    srv1:
+      ansible_host: 163.172.151.228

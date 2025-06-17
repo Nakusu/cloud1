@@ -1,0 +1,18 @@
+- name: Setup requiments
+  hosts: all
+  strategy: free
+  become: true
+  pre_tasks:
+    - name: Test hosts
+      ansible.builtin.ping:
+    - name: Upgrade
+      ansible.builtin.apt:
+        update_cache: true
+        upgrade: "full"
+    - name: Install python3
+      ansible.builtin.apt:
+        name: python3
+        install_recommends: false
+  roles:
+    - docker
+    - docker-compose

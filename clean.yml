@@ -1,0 +1,15 @@
+- name: Removing install
+  hosts: all
+  strategy: free
+  become: true
+  pre_tasks:
+    - name: Verify if app exists
+      ansible.builtin.stat:
+        path: /home/app
+      register: ret
+    - name: Block cleaning
+      ansible.builtin.fail:
+        msg: "App already cleaned"
+      when: ret.stat.exists != true
+  roles:
+    - clean
