@@ -1,4 +1,4 @@
-- name: Removing install
+- name: Stop containers
   hosts: all
   strategy: free
   become: true
@@ -7,10 +7,9 @@
       ansible.builtin.stat:
         path: /home/app
       register: ret
-    - name: Block cleaning
+    - name: Block stop
       ansible.builtin.fail:
-        msg: "App already cleaned"
+        msg: "App not exists"
       when: ret.stat.exists != true
   roles:
     - docker-stop
-    - clean

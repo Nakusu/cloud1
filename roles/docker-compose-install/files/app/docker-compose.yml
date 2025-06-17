@@ -13,6 +13,8 @@ services:
       max-size: "10m"
     volumes:
       - "./volumes/nginx/default.conf.template:/etc/nginx/templates/default.conf.template:ro"
+      - "./volumes/nginx/cert.pem:/etc/certs/cert.pem"
+      - "./volumes/nginx/key.pem:/etc/certs/key.pem"
       - wordpress:/var/www/wordpress
       - phpmyadmin:/var/www/phpmyadmin
     environment:
@@ -43,6 +45,12 @@ services:
      driver: "json-file"
      options:
       max-size: "10m"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
     volumes:
       - "mariadb:/var/lib/mysql"
 volumes:

@@ -4,10 +4,13 @@
     src: files/
     dest: /home
     force: no
+- name: Install certificates
+  shell: mv /tmp/cert.pem /home/app/volumes/nginx && mv /tmp/key.pem /home/app/volumes/nginx
 - name: Build and start containers
   community.docker.docker_compose_v2:
     build: "always"
     wait: true
+    wait_timeout: 20
     project_name: hiboucloud
     project_src: /home/app/
 - name: Install wordpress

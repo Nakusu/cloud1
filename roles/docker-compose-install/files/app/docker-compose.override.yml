@@ -1,0 +1,21 @@
+services:
+  db:
+    environment:
+      - MARIADB_DATABASE=cloud1
+      - MARIADB_USER=cloud1
+      - MARIADB_PASSWORD=vsvfdvfvfe45fse12szZSA
+      - MARIADB_ROOT_PASSWORD=fselkmvcXmkcekX1fef
+  nginx:
+    environment:
+      - WORDPRESS_SERVER_NAME=hiboucloud.duckdns.org
+      - PHPMYADMIN_SERVER_NAME=adminhiboucloud.duckdns.org
+  wordpress:
+    environment:
+      - DB_NAME=cloud1
+      - DB_USER=cloud1
+      - DB_PASSWORD=vsvfdvfvfe45fse12szZSA
+      - DB_HOST=db
+      - WP_ADMIN=leopold.lepage@gmail.com
+      - WP_PASSWORD=hibou123
+      - WP_TITLE=HibouCloud
+      - WP_URL=https://hiboucloud.duckdns.org
