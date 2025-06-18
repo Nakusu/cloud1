@@ -1,0 +1,3 @@
+wordpress_server_name: hiboucloud2.duckdns.org
+phpmyadmin_server_name: admhiboucloud2.duckdns.org
+wp_url: https://hiboucloud2.duckdns.org

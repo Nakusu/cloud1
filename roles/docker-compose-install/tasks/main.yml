@@ -4,16 +4,9 @@
     src: files/
     dest: /home
     force: no
+- name: Generate docker-composer.override.yml
+  ansible.builtin.template:
+    src: docker-compose.override.yml.j2
+    dest: /home/app/docker-compose.override.yml
 - name: Install certificates
   shell: mv /tmp/cert.pem /home/app/volumes/nginx && mv /tmp/key.pem /home/app/volumes/nginx
-- name: Build and start containers
-  community.docker.docker_compose_v2:
-    build: "always"
-    wait: true
-    wait_timeout: 20
-    project_name: hiboucloud
-    project_src: /home/app/
-- name: Install wordpress
-  community.docker.docker_container_exec:
-    container: hiboucloud-wordpress-1
-    command: /var/www/wordpress/install.sh

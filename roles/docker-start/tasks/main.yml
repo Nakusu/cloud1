@@ -1,0 +1,11 @@
+- name: Build and start containers
+  community.docker.docker_compose_v2:
+    build: "always"
+    wait: true
+    wait_timeout: 20
+    project_name: hiboucloud
+    project_src: /home/app/
+- name: Install wordpress
+  community.docker.docker_container_exec:
+    container: hiboucloud-wordpress-1
+    command: /var/www/wordpress/install.sh

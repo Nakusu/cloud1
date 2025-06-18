@@ -1,0 +1,21 @@
+services:
+  db:
+    environment:
+      - MARIADB_DATABASE=cloud1
+      - MARIADB_USER=cloud1
+      - MARIADB_PASSWORD={{ db_pwd }}
+      - MARIADB_ROOT_PASSWORD={{ db_root_pwd }}
+  nginx:
+    environment:
+      - WORDPRESS_SERVER_NAME={{ wordpress_server_name }}
+      - PHPMYADMIN_SERVER_NAME={{ phpmyadmin_server_name }}
+  wordpress:
+    environment:
+      - DB_NAME=cloud1
+      - DB_USER=cloud1
+      - DB_PASSWORD={{ db_pwd }}
+      - DB_HOST=db
+      - WP_ADMIN={{ wp_admin }}
+      - WP_PASSWORD={{ wp_pwd }}
+      - WP_TITLE=HibouCloud
+      - WP_URL={{ wp_url }}

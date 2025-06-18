@@ -9,11 +9,17 @@
       ansible.builtin.apt:
         update_cache: true
         upgrade: "full"
+        install_recommends: false
+      retries: 3
+      delay: 10
     - name: Install python3
       ansible.builtin.apt:
         name: python3
         install_recommends: false
+  vars_files:
+    - vars/main.yml
   roles:
     - docker-install
     - generate-certificates
     - docker-compose-install
+    - docker-start
