@@ -1,2 +1,2 @@
 - name: Generate certificates
-  shell: openssl req -x509 -newkey rsa:4096 -keyout /tmp/key.pem -out /tmp/cert.pem -sha256 -days 3650 -nodes -subj "/O=Hiboucloud/CN=duckdns.org"
+  shell: openssl req -x509 -newkey rsa:4096 -keyout /tmp/key.pem -out /tmp/cert.pem -sha256 -days 3650 -nodes -subj "/O={{ organization_name }}/CN={{ base_domain }}"
